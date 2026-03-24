@@ -1,0 +1,2 @@
+# pysite
+static site generation
