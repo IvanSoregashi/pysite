@@ -1,9 +1,10 @@
+import os
 import sys
 import shutil
 from pathlib import Path
 sys.path.append(str(Path(__file__).parent.parent.absolute()))
 
-from src.markdown import generate_page, generate_pages_recursive
+from src.markdown import generate_pages_recursive
 
 
 def copy_static_content(from_dir: str, to_dir: str):
@@ -18,7 +19,8 @@ def copy_static_content(from_dir: str, to_dir: str):
 
 
 def main():
-    copy_static_content("static", "public")
-    generate_pages_recursive("content", "template.html", "public")
+    basepath = sys.argv[1] if len(sys.argv) > 1 else "/"
+    copy_static_content("static", "docs")
+    generate_pages_recursive("content", "template.html", "docs", basepath)
 
 print(main())
