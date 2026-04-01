@@ -30,8 +30,10 @@ def generate_page(from_path: str, template_path: str, dest_path: str, basepath: 
     html_content = markdown_to_html_node(md).to_html()
     title = extract_title(md)
     html = template.replace("{{ Title }}", title).replace("{{ Content }}", html_content)
-    html = href_re.sub(f"href=\"{basepath}", html)
-    html = src_re.sub(f"src=\"{basepath}", html)
+    # html = href_re.sub(f"href=\"{basepath}", html)
+    # html = src_re.sub(f"src=\"{basepath}", html)
+    html = html.replace('href="/', f'href="{basepath}')
+    html = html.replace('src="/', f'src="{basepath}')
 
 
     dest = Path(dest_path)
